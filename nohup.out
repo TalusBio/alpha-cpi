@@ -1,0 +1,34 @@
+the input device is not a TTY
+[I 16:42:12.865 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 16:42:13.091 NotebookApp] Serving notebooks from local directory: /app
+[I 16:42:13.091 NotebookApp] Jupyter Notebook 6.4.0 is running at:
+[I 16:42:13.091 NotebookApp] http://bc440a0cffb8:8888/?token=9654143c9b65eb9075d9e63ddb43ee9a880026706dc5b45f
+[I 16:42:13.091 NotebookApp]  or http://127.0.0.1:8888/?token=9654143c9b65eb9075d9e63ddb43ee9a880026706dc5b45f
+[I 16:42:13.091 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 16:42:13.095 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-1-open.html
+    Or copy and paste one of these URLs:
+        http://bc440a0cffb8:8888/?token=9654143c9b65eb9075d9e63ddb43ee9a880026706dc5b45f
+     or http://127.0.0.1:8888/?token=9654143c9b65eb9075d9e63ddb43ee9a880026706dc5b45f
+docker: Error response from daemon: driver failed programming external connectivity on endpoint naughty_elion (e786af734b58e67b5dc2cfcf7f5222531145c99bd629c8ef699176acc21c7c20): Bind for 0.0.0.0:8888 failed: port is already allocated.
+docker: Error response from daemon: driver failed programming external connectivity on endpoint trusting_bose (24a378a880ff6f744816a26a4d5985842e2f183c5ed67382d5394a2a11fd1105): Bind for 0.0.0.0:8888 failed: port is already allocated.
+[I 16:50:53.555 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 16:50:53.770 NotebookApp] Serving notebooks from local directory: /app
+[I 16:50:53.770 NotebookApp] Jupyter Notebook 6.4.0 is running at:
+[I 16:50:53.770 NotebookApp] http://93dfbba8888e:8888/?token=bd796a6d189b78caf32e5c0a294ad061a1255d5139a7c166
+[I 16:50:53.770 NotebookApp]  or http://127.0.0.1:8888/?token=bd796a6d189b78caf32e5c0a294ad061a1255d5139a7c166
+[I 16:50:53.770 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 16:50:53.773 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-1-open.html
+    Or copy and paste one of these URLs:
+        http://93dfbba8888e:8888/?token=bd796a6d189b78caf32e5c0a294ad061a1255d5139a7c166
+     or http://127.0.0.1:8888/?token=bd796a6d189b78caf32e5c0a294ad061a1255d5139a7c166
+[I 16:51:39.814 NotebookApp] 302 GET /?token=bd796a6d189b78caf32e5c0a294ad061a1255d5139a7c166 (172.17.0.1) 0.600000ms
+[C 16:52:58.713 NotebookApp] received signal 15, stopping
+[I 16:52:58.714 NotebookApp] Shutting down 0 kernels
+[I 16:52:58.714 NotebookApp] Shutting down 0 terminals
+time="2021-07-26T16:52:59Z" level=error msg="error waiting for container: unexpected EOF"

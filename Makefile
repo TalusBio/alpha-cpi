@@ -92,7 +92,7 @@ docker-cuda-build:
 	docker build -t alpha-cpi-cuda . -f docker-cuda/Dockerfile
 
 docker-cuda-run: docker-cuda-build
-	nvidia-docker run -it --rm -p 8888:8888 -v "${PWD}/data/:/mnt/efs/rmeinl/alpha-cpi/data/" alpha-cpi-cuda
+	docker run --rm --gpus all -p 8888:8888 -v "${PWD}/:/app/alpha-cpi/" -v "${PWD}/alphafold/data/params/:/app/alphafold/alphafold/data/params/" alpha-cpi-cuda
 
 docker-cuda-tag:
 	docker tag alpha-cpi-cuda:latest rmeinl/alpha-cpi-cuda:latest

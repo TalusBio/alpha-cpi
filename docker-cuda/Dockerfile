@@ -1,8 +1,12 @@
-ARG CUDA=11.0
-FROM nvidia/cuda:${CUDA}-base
+ARG CUDA_FULL=11.2.2
+FROM nvidia/cuda:${CUDA_FULL}-cudnn8-runtime-ubuntu20.04
 # FROM directive resets ARGS, so we specify again (the value is retained if
 # previously set).
-ARG CUDA
+ARG CUDA_FULL
+ARG CUDA=11.2
+# JAXLIB no longer built for all minor CUDA versions:
+# https://github.com/google/jax/blob/main/CHANGELOG.md#jaxlib-0166-may-11-2021
+ARG CUDA_JAXLIB=11.1
 
 # Use bash to support string substitution.
 SHELL ["/bin/bash", "-c"]
@@ -22,19 +26,19 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 # Install Miniconda package manger.
 RUN wget -q -P /tmp \
-    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
-    && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
+    https://repo.anaconda.com/miniconda/Miniconda3-py38_4.9.2-Linux-x86_64.sh \
+    && bash /tmp/Miniconda3-py38_4.9.2-Linux-x86_64.sh -b -p /opt/conda \
+    && rm /tmp/Miniconda3-py38_4.9.2-Linux-x86_64.sh
 
 # Install conda packages.
 ENV PATH="/opt/conda/bin:$PATH"
 RUN conda update -qy conda \
     && conda install -y -c conda-forge \
         openmm=7.5.1 \
+	cudatoolkit==${CUDA_FULL} \
         pdbfixer \
         pip \
-        jupyter \
-        python=3.7
+        jupyter
 
 WORKDIR /app
 
@@ -43,18 +47,17 @@ RUN git clone -b main https://github.com/rmeinl/alphafold.git alphafold/
 RUN wget -q -P /app/alphafold/alphafold/common/ \
     https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
 
-# # Install pip packages.
+# Install pip packages.
 RUN pip3 install --upgrade pip \
-    && pip3 install -r /app/alphafold/requirements.txt \
-    && pip3 install --upgrade jax
+    && pip3 install -e /app/alphafold \
+    && pip3 install --upgrade jax jaxlib==0.1.69+cuda${CUDA_JAXLIB/./} -f \      
+	https://storage.googleapis.com/jax-releases/jax_releases.html
 
-# # Apply OpenMM patch.
-WORKDIR /opt/conda/lib/python3.7/site-packages
+# Apply OpenMM patch.
+WORKDIR /opt/conda/lib/python3.8/site-packages
 RUN patch -p0 < /app/alphafold/docker/openmm.patch
 
 WORKDIR /app
-
-COPY . alpha-cpi/
 
 EXPOSE 8888
 
