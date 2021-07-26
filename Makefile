@@ -76,13 +76,26 @@ tf-destroy:
 #################################################################################
 
 docker-build:
-	docker build -t alpha_cpi . -f docker/Dockerfile
+	docker build -t alpha-cpi . -f docker/Dockerfile
 
 docker-run: docker-build
-	docker run -it --rm -p 8888:8888 -v "${PWD}/data/:/app/data/" alpha_cpi
+	docker run -it --rm -p 8888:8888 -v "${PWD}/data/:/app/data/" alpha-cpi
 
 docker-tag:
-	docker tag alpha_cpi:latest rmeinl/alpha_cpi:latest
+	docker tag alpha-cpi:latest rmeinl/alpha-cpi:latest
 
 docker-push: docker-build docker-tag
-	docker push rmeinl/alpha_cpi:latest
+	docker push rmeinl/alpha-cpi:latest
+
+# Cuda
+docker-cuda-build:
+	docker build -t alpha-cpi-cuda . -f docker-cuda/Dockerfile
+
+docker-cuda-run: docker-cuda-build
+	nvidia-docker run -it --rm -p 8888:8888 -v "${PWD}/data/:/mnt/efs/rmeinl/alpha-cpi/data/" alpha-cpi-cuda
+
+docker-cuda-tag:
+	docker tag alpha-cpi-cuda:latest rmeinl/alpha-cpi-cuda:latest
+
+docker-cuda-push: docker-cuda-build docker-cuda-tag
+	docker push rmeinl/alpha-cpi-cuda:latest

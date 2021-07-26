@@ -1,6 +1,6 @@
 resource "aws_instance" "instance" {
   ami           = var.ami_id
-  instance_type = "r4.2xlarge"
+  instance_type = "p3.2xlarge"
 
   user_data = templatefile("user_data.tpl", { efs_file_system_id = data.terraform_remote_state.data_pipeline.outputs.efs_file_system_id })
 
