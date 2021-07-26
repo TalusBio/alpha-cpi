@@ -186,3 +186,4 @@ cython_debug/
 
 data/AVE_unbiased/
 alphafold/data/params/
+nohup.out
