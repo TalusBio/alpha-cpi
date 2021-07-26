@@ -8,8 +8,12 @@ resource "aws_instance" "instance" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.security_group_id]
 
+  root_block_device {
+    volume_size = 200
+  }
+
   tags = {
-    Name = "alpha-cpi"
+    Name    = "alpha-cpi"
     owner   = var.owner
     project = var.project_name
   }

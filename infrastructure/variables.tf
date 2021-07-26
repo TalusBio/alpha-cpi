@@ -17,6 +17,7 @@ variable "aws_key_name" {
 }
 
 variable "ami_id" {}
+variable "availability_zone" {}
 variable "subnet_id" {}
 variable "security_group_id" {}
 

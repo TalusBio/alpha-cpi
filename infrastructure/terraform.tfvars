@@ -8,12 +8,13 @@ remote_state_bucket = "talus-remote-state-bucket"
 remote_state_db     = "talus-remote-state-locks"
 
 # Instance
-ami_id = "ami-08c6f8e3871c56139" # us-west-2, deep learning ami, ubuntu
+ami_id            = "ami-08c6f8e3871c56139" # us-west-2, deep learning ami, ubuntu
+availability_zone = "us-west-2b"
 
 # Networking
 subnet_id         = "subnet-49fe0c03"
 security_group_id = "sg-0f2ec03b5a36cf3f9"
-aws_key_name = "parallelcluster"
+aws_key_name      = "parallelcluster"
 
 # Tags
 owner = "Rico Meinl"
