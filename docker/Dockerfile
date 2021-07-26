@@ -20,9 +20,8 @@ RUN conda update -qy conda \
 
 WORKDIR /app
 
-COPY . .
-
-RUN git clone https://github.com/rmeinl/alphafold.git alphafold/
+ADD https://api.github.com/repos/rmeinl/alphafold/git/refs/heads/main version.json
+RUN git clone -b main https://github.com/rmeinl/alphafold.git alphafold/
 RUN wget -q -P /app/alphafold/alphafold/common/ \
     https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
 
@@ -36,6 +35,8 @@ WORKDIR /opt/conda/lib/python3.7/site-packages
 RUN patch -p0 < /app/alphafold/docker/openmm.patch
 
 WORKDIR /app
+
+COPY . alpha-cpi/
 
 EXPOSE 8888
 
