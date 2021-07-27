@@ -184,6 +184,8 @@ cython_debug/
 .idea/vcs.xml
 .idea
 
+.ipynb_checkpoints
+
 data/AVE_unbiased/
 alphafold/data/params/
 nohup.out
