@@ -187,3 +187,6 @@ cython_debug/
 data/AVE_unbiased/
 alphafold/data/params/
 nohup.out
+data/fingerprints/
+data/model_embeddings/  
+data/msa_sequences/
